@@ -24,6 +24,7 @@ export default function SignInPage() {
       .signIn({ ...form })
       .then((res) => {
         setDisabledLogin(false);
+        console.log(res.data);
         setUser(res.data);
         navigate("/home");
       })

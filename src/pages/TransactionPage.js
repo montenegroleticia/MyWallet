@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import apiTransaction from "../services/apiTransaction";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function TransactionsPage() {
-  const [form, setForm] = useState({ email: "", senha: "" });
+  const { user } = useContext(UserContext);
+  const [form, setForm] = useState({ valor: "", descricao: "" });
   const [disabledTransaction, setDisabledTransaction] = useState(false);
   const navigate = useNavigate();
 
@@ -15,9 +17,9 @@ export default function TransactionsPage() {
   function handleTransaction(e) {
     e.preventDefault(e);
     setDisabledTransaction(true);
-
+    console.log(user.token);
     apiTransaction
-      .home(form)
+      .home(form, user.token)
       .then((res) => {
         setDisabledTransaction(false);
         navigate(`/home`);

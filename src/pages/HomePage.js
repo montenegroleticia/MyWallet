@@ -1,25 +1,34 @@
 import styled from "styled-components";
 import { BiExit } from "react-icons/bi";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import apiTransaction from "../services/apiTransaction";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const { user } = useContext(UserContext);
+  const [transactions, setTransactions] = useState([]);
+  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
-  function transaction(type) {
+  useEffect(home, [user.token]);
+
+  function home() {
     apiTransaction
-      .home()
+      .home(user.token)
       .then((res) => {
-        navigate(`/nova-transacao/${type}`);
+        console.log(res.data);
+        setTransactions(res.data);
       })
       .catch((err) => {
         alert(err.response.data.message);
       });
   }
+  function transaction(type) {
+    navigate(`/nova-transacao/${type}`);
+  }
+
   return (
     <HomeContainer>
       <Header>
@@ -29,37 +38,33 @@ export default function HomePage() {
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          {transactions.map((t) => (
+            <ListItemContainer key={t._id}>
+              <div>
+                <span>{t.data}</span>
+                <strong>{t.descricao}</strong>
+              </div>
+              <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
+                {t.valor}
+              </Value>
+            </ListItemContainer>
+          ))}
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={total < 0 ? "negativo" : "positivo"}>{total}</Value>
         </article>
       </TransactionsContainer>
 
       <ButtonsContainer>
-        <button>
+        <button onClick={() => transaction("entrada")}>
           <AiOutlinePlusCircle />
           <p>
             Nova <br /> entrada
           </p>
         </button>
-        <button>
+        <button onClick={() => transaction("saida")}>
           <AiOutlineMinusCircle />
           <p>
             Nova <br />

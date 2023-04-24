@@ -15,8 +15,11 @@ function home(token) {
   return promise;
 }
 
-function transaction(body) {
-  const promise = axios.post(`${BASE_URL}/nova-transacao/:tipo`, body);
+function transaction(body, token) {
+  const promise = axios.post(`${BASE_URL}/nova-transacao/:tipo`,
+    body,
+    createConfig(token)
+  );
   return promise;
 }
 
