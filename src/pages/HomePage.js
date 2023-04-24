@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function HomePage() {
   const { user, setUser } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(null);
   const navigate = useNavigate();
 
   useEffect(home, [user.token]);
@@ -38,6 +38,17 @@ export default function HomePage() {
       .catch((err) => console.log(err.response.data.message));
   }
 
+  useEffect(() => {
+    const newTotal = transactions.reduce((total, t) => {
+      if (t.tipo === "entrada") {
+        return total + Number(t.valor);
+      } else {
+        return total - Number(t.valor);
+      }
+    }, 0);
+    setTotal(newTotal);
+  }, [transactions]);
+
   return (
     <HomeContainer>
       <Header>
@@ -54,7 +65,7 @@ export default function HomePage() {
                 <strong>{t.descricao}</strong>
               </div>
               <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
-                {t.valor}
+                {Number(t.valor).toFixed(2).replace(".", ",")}
               </Value>
             </ListItemContainer>
           ))}
@@ -62,7 +73,9 @@ export default function HomePage() {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={total < 0 ? "negativo" : "positivo"}>{total}</Value>
+          <Value color={total < 0 ? "negativo" : "positivo"}>
+            {Number(total).toFixed(2)}
+          </Value>
         </article>
       </TransactionsContainer>
 
