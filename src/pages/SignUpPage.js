@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import MyWalletLogo from "../components/MyWalletLogo"
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import MyWalletLogo from "../components/MyWalletLogo";
 
 export default function SignUpPage() {
   return (
@@ -9,16 +9,22 @@ export default function SignUpPage() {
         <MyWalletLogo />
         <input placeholder="Nome" type="text" />
         <input placeholder="E-mail" type="email" />
-        <input placeholder="Senha" type="password" autocomplete="new-password" />
-        <input placeholder="Confirme a senha" type="password" autocomplete="new-password" />
+        <input
+          placeholder="Senha"
+          type="password"
+          autocomplete="new-password"
+        />
+        <input
+          placeholder="Confirme a senha"
+          type="password"
+          autocomplete="new-password"
+        />
         <button>Cadastrar</button>
       </form>
 
-      <Link>
-        Já tem uma conta? Entre agora!
-      </Link>
+      <Link>Já tem uma conta? Entre agora!</Link>
     </SingUpContainer>
-  )
+  );
 }
 
 const SingUpContainer = styled.section`
@@ -27,4 +33,4 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
