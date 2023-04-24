@@ -17,7 +17,7 @@ function home(token) {
 
 function transaction(body, token) {
   const promise = axios.post(
-    `${BASE_URL}/nova-transacao/:tipo`,
+    `${BASE_URL}/nova-transacao`,
     body,
     createConfig(token)
   );

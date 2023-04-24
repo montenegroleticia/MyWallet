@@ -17,9 +17,9 @@ export default function TransactionsPage() {
   function handleTransaction(e) {
     e.preventDefault(e);
     setDisabledTransaction(true);
-    console.log(user.token);
+
     apiTransaction
-      .home(form, user.token)
+      .transaction(form, user.token)
       .then((res) => {
         setDisabledTransaction(false);
         navigate(`/home`);
