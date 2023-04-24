@@ -121,6 +121,7 @@ const TransactionsContainer = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
   article {
     display: flex;
     justify-content: space-between;
