@@ -74,8 +74,8 @@ export default function SignUpPage() {
         <button type="submit" disabled={disabledRegister}>
           {disabledRegister ? (
             <ThreeDots
-              height="80"
-              width="80"
+              height="40"
+              width="40"
               radius="9"
               color="#FFFFFF"
               ariaLabel="three-dots-loading"
@@ -100,4 +100,9 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

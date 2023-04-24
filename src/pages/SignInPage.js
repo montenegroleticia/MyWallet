@@ -24,7 +24,7 @@ export default function SignInPage() {
       .signIn({ ...form })
       .then((res) => {
         setDisabledLogin(false);
-        setUser(res.data.token);
+        setUser(res.data);
         navigate("/home");
       })
       .catch((err) => {
@@ -59,8 +59,8 @@ export default function SignInPage() {
         <button disabled={disabledLogin} type="submit">
           {disabledLogin ? (
             <ThreeDots
-              height="80"
-              width="80"
+              height="40"
+              width="40"
               radius="9"
               color="#FFFFFF"
               ariaLabel="three-dots-loading"
@@ -85,4 +85,9 @@ const SingInContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

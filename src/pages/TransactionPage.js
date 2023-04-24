@@ -1,13 +1,58 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import apiTransaction from "../services/apiTransaction";
+import { useState } from "react";
 
 export default function TransactionsPage() {
+  const [form, setForm] = useState({ email: "", senha: "" });
+  const [disabledTransaction, setDisabledTransaction] = useState(false);
+  const navigate = useNavigate();
+
+  function handleForm(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  function handleTransaction(e) {
+    e.preventDefault(e);
+    setDisabledTransaction(true);
+
+    apiTransaction
+      .home(form)
+      .then((res) => {
+        setDisabledTransaction(false);
+        navigate(`/home`);
+      })
+      .catch((err) => {
+        setDisabledTransaction(false);
+        alert(err.response.data.message);
+      });
+  }
+
   return (
     <TransactionsContainer>
       <h1>Nova TRANSAÇÃO</h1>
-      <form>
-        <input placeholder="Valor" type="text" />
-        <input placeholder="Descrição" type="text" />
-        <button>Salvar TRANSAÇÃO</button>
+      <form onSubmit={handleTransaction}>
+        <input
+          name="valor"
+          placeholder="Valor"
+          type="text"
+          required
+          disabled={disabledTransaction}
+          value={form.valor}
+          onChange={handleForm}
+        />
+        <input
+          name="descricao"
+          placeholder="Descrição"
+          type="text"
+          required
+          disabled={disabledTransaction}
+          value={form.descricao}
+          onChange={handleForm}
+        />
+        <button disabled={disabledTransaction} type="submit">
+          Salvar TRANSAÇÃO
+        </button>
       </form>
     </TransactionsContainer>
   );
