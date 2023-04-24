@@ -9,7 +9,7 @@ import { ThreeDots } from "react-loader-spinner";
 export default function SignInPage() {
   const [form, setForm] = useState({ email: "", senha: "" });
   const { setUser } = useContext(UserContext);
-  const { disabledLogin, setDisabledLogin } = useState(false);
+  const [disabledLogin, setDisabledLogin] = useState(false);
   const navigate = useNavigate();
 
   function handleForm(e) {
@@ -17,11 +17,11 @@ export default function SignInPage() {
   }
 
   function handleLogin(e) {
-    e.preventeDefault();
+    e.preventDefault();
     setDisabledLogin(true);
 
     apiAuth
-      .login(form)
+      .signIn({ ...form })
       .then((res) => {
         setDisabledLogin(false);
         setUser(res.data.token);
@@ -57,7 +57,7 @@ export default function SignInPage() {
           onChange={handleForm}
         />
         <button disabled={disabledLogin} type="submit">
-          {disabledLogin === true ? (
+          {disabledLogin ? (
             <ThreeDots
               height="80"
               width="80"
