@@ -14,7 +14,7 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={handleRegister}>
         <MyWalletLogo />
-        <input placeholder="Nome" type="text" />
+        <input name="nome" placeholder="Nome" type="text" disabled={disabledLogin} value={form.name} onChange={handleForm} />
         <input placeholder="E-mail" type="email" />
         <input
           placeholder="Senha"

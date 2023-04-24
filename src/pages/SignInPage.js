@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import MyWalletLogo from "../components/MyWalletLogo";
 import apiAuth from "../services/apiAuth";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function SignInPage() {
   const [form, setForm] = useState({ email: "", senha: "" });
+  const { setUser } = useContext(UserContext);
+  const { disabledLogin, setDisabledLogin } = useState(false);
   const navigate = useNavigate();
 
   function handleForm(e) {
@@ -14,15 +18,17 @@ export default function SignInPage() {
 
   function handleLogin(e) {
     e.preventeDefault();
+    setDisabledLogin(true);
 
     apiAuth
       .login(form)
       .then((res) => {
-        console.log(res.data);
+        setDisabledLogin(false);
+        setUser(res.data.token);
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        setDisabledLogin(false);
         alert(err.response.data.message);
       });
   }
@@ -36,6 +42,7 @@ export default function SignInPage() {
           placeholder="E-mail"
           type="email"
           required
+          disabled={disabledLogin}
           value={form.email}
           onChange={handleForm}
         />
@@ -45,10 +52,26 @@ export default function SignInPage() {
           type="password"
           required
           autoComplete="new-password"
+          disabled={disabledLogin}
           value={form.senha}
           onChange={handleForm}
         />
-        <button type="submit">Entrar</button>
+        <button disabled={disabledLogin} type="submit">
+          {disabledLogin === true ? (
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#FFFFFF"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            "Entrar"
+          )}
+        </button>
       </form>
 
       <Link to={`/cadastro`}>Primeira vez? Cadastre-se!</Link>
