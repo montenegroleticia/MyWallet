@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://mywallet-api-m71s.onrender.com";
 
 function signIn(body) {
   const promise = axios.post(`${BASE_URL}/`, body);
