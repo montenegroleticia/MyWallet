@@ -25,15 +25,23 @@ export default function HomePage() {
         alert(err.response.data.message);
       });
   }
+
   function transaction(type) {
     navigate(`/nova-transacao/${type}`);
+  }
+
+  function logout() {
+    apiTransaction
+      .logout(user.token)
+      .then(() => navigate("/"))
+      .catch((err) => console.log(err.response.data.message));
   }
 
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, {user.name}</h1>
-        <BiExit />
+        <BiExit onClick={() => logout()} />
       </Header>
 
       <TransactionsContainer>

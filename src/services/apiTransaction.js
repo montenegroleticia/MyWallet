@@ -16,12 +16,18 @@ function home(token) {
 }
 
 function transaction(body, token) {
-  const promise = axios.post(`${BASE_URL}/nova-transacao/:tipo`,
+  const promise = axios.post(
+    `${BASE_URL}/nova-transacao/:tipo`,
     body,
     createConfig(token)
   );
   return promise;
 }
 
-const apiAuth = { home, transaction };
+function logout(token) {
+  const promise = axios.delete(`${BASE_URL}/logout`, createConfig(token));
+  return promise;
+}
+
+const apiAuth = { home, transaction, logout};
 export default apiAuth;
