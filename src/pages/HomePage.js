@@ -7,7 +7,7 @@ import apiTransaction from "../services/apiTransaction";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ export default function HomePage() {
   }
 
   function transaction(type) {
+    setUser({ ...user, type: type });
     navigate(`/nova-transacao/${type}`);
   }
 
