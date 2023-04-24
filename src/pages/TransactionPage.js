@@ -38,6 +38,8 @@ export default function TransactionsPage() {
           name="valor"
           placeholder="Valor"
           type="number"
+          step="0.01"
+          min="0"
           required
           disabled={disabledTransaction}
           value={form.valor}
