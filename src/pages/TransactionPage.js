@@ -37,7 +37,7 @@ export default function TransactionsPage() {
         <input
           name="valor"
           placeholder="Valor"
-          type="text"
+          type="number"
           required
           disabled={disabledTransaction}
           value={form.valor}
