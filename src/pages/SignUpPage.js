@@ -1,28 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MyWalletLogo from "../components/MyWalletLogo";
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
+
+  function handleRegister(e) {
+    e.preventeDefault();
+    navigate("/");
+  }
+
   return (
     <SingUpContainer>
-      <form>
+      <form onSubmit={handleRegister}>
         <MyWalletLogo />
         <input placeholder="Nome" type="text" />
         <input placeholder="E-mail" type="email" />
         <input
           placeholder="Senha"
           type="password"
-          autocomplete="new-password"
+          autoComplete="new-password"
         />
         <input
           placeholder="Confirme a senha"
           type="password"
-          autocomplete="new-password"
+          autoComplete="new-password"
         />
         <button>Cadastrar</button>
       </form>
 
-      <Link>Já tem uma conta? Entre agora!</Link>
+      <Link to={`/`}>Já tem uma conta? Entre agora!</Link>
     </SingUpContainer>
   );
 }

@@ -1,22 +1,57 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyWalletLogo from "../components/MyWalletLogo";
+import apiAuth from "../services/apiAuth";
+import { useState } from "react";
 
 export default function SignInPage() {
+  const [form, setForm] = useState({ email: "", senha: "" });
+  const navigate = useNavigate();
+
+  function handleForm(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  function handleLogin(e) {
+    e.preventeDefault();
+
+    apiAuth
+      .login(form)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+      });
+  }
+
   return (
     <SingInContainer>
-      <form>
+      <form onSubmit={handleLogin}>
         <MyWalletLogo />
-        <input placeholder="E-mail" type="email" />
         <input
+          name="email"
+          placeholder="E-mail"
+          type="email"
+          required
+          value={form.email}
+          onChange={handleForm}
+        />
+        <input
+          name="senha"
           placeholder="Senha"
           type="password"
-          autocomplete="new-password"
+          required
+          autoComplete="new-password"
+          value={form.senha}
+          onChange={handleForm}
         />
-        <button>Entrar</button>
+        <button type="submit">Entrar</button>
       </form>
 
-      <Link>Primeira vez? Cadastre-se!</Link>
+      <Link to={`/cadastro`}>Primeira vez? Cadastre-se!</Link>
     </SingInContainer>
   );
 }
