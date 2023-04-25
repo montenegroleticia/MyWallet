@@ -29,5 +29,10 @@ function logout(token) {
   return promise;
 }
 
-const apiAuth = { home, transaction, logout};
+function deleteTransaction(token, id){
+  const promise = axios.delete(`${REACT_APP_API_URL}/${id}`, createConfig(token));
+  return promise;
+}
+
+const apiAuth = { home, transaction, logout, deleteTransaction};
 export default apiAuth;

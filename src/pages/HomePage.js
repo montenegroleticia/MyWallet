@@ -44,6 +44,15 @@ export default function HomePage() {
       .catch((err) => alert(err.response.data));
   }
 
+  function deleteTransaction(id) {
+    window.confirm("Deseja deletar essa transação?");
+
+    apiTransaction
+      .deleteTransaction(user.token, id)
+      .then()
+      .catch((err) => alert(err.response.data));
+  }
+
   useEffect(() => {
     const newTotal = transactions.reduce((total, t) => {
       if (t.tipo === "entrada") {
@@ -75,7 +84,7 @@ export default function HomePage() {
                   <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
                     {Number(t.valor).toFixed(2).replace(".", ",")}
                   </Value>
-                  <p>X</p>
+                  <p onClick={() => deleteTransaction(t._id)}>X</p>
                 </div>
               </ListItemContainer>
             ))}
