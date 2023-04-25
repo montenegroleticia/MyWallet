@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import apiTransaction from "../services/apiTransaction";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function TransactionsPage() {
   const { user } = useContext(UserContext);
@@ -55,7 +56,20 @@ export default function TransactionsPage() {
           onChange={handleForm}
         />
         <button disabled={disabledTransaction} type="submit">
-          Salvar TRANSAÇÃO
+          {disabledTransaction ? (
+            <ThreeDots
+              height="40"
+              width="40"
+              radius="9"
+              color="#FFFFFF"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            `Salvar ${user.type === "saida" ? "saída" : "entrada"}`
+          )}
         </button>
       </form>
     </TransactionsContainer>
@@ -68,9 +82,13 @@ const TransactionsContainer = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-
   h1 {
     align-self: flex-start;
     margin-bottom: 40px;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
