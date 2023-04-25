@@ -9,7 +9,7 @@ export default function SignUpPage() {
   const [form, setForm] = useState({ nome: "", email: "", senha: "" });
   const [disabledRegister, setDisabledRegister] = useState(false);
   const navigate = useNavigate();
-  const confirmarSenha = null;
+  let confirmarSenha;
 
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
