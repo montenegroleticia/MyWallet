@@ -9,6 +9,7 @@ export default function SignUpPage() {
   const [form, setForm] = useState({ nome: "", email: "", senha: "" });
   const [disabledRegister, setDisabledRegister] = useState(false);
   const navigate = useNavigate();
+  const confirmarSenha = null;
 
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,6 +17,9 @@ export default function SignUpPage() {
 
   function handleRegister(e) {
     e.preventDefault();
+
+    if (form.senha !== form.confirmarSenha) return alert("Senhas diferentes!");
+
     setDisabledRegister(true);
 
     apiAuth
@@ -38,6 +42,7 @@ export default function SignUpPage() {
           name="nome"
           placeholder="Nome"
           type="text"
+          required
           disabled={disabledRegister}
           value={form.name}
           onChange={handleForm}
@@ -62,13 +67,12 @@ export default function SignUpPage() {
           onChange={handleForm}
         />
         <input
-          name="senha"
+          name="confirmarSenha"
           placeholder="Confirme a senha"
           type="password"
           required
-          autoComplete="new-password"
           disabled={disabledRegister}
-          value={form.senha}
+          value={confirmarSenha}
           onChange={handleForm}
         />
         <button type="submit" disabled={disabledRegister}>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://mywallet-api-m71s.onrender.com";
+const REACT_APP_API_URL = "https://mywallet-api-m71s.onrender.com";
 
 function createConfig(token) {
   return {
@@ -11,13 +11,13 @@ function createConfig(token) {
 }
 
 function home(token) {
-  const promise = axios.get(`${BASE_URL}/home`, createConfig(token));
+  const promise = axios.get(`${REACT_APP_API_URL}/home`, createConfig(token));
   return promise;
 }
 
 function transaction(type, body, token) {
   const promise = axios.post(
-    `${BASE_URL}/nova-transacao/${type}`,
+    `${REACT_APP_API_URL}/nova-transacao/${type}`,
     body,
     createConfig(token)
   );
@@ -25,7 +25,7 @@ function transaction(type, body, token) {
 }
 
 function logout(token) {
-  const promise = axios.delete(`${BASE_URL}/logout`, createConfig(token));
+  const promise = axios.delete(`${REACT_APP_API_URL}/logout`, createConfig(token));
   return promise;
 }
 

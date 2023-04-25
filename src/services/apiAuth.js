@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const BASE_URL = "https://mywallet-api-m71s.onrender.com";
+const REACT_APP_API_URL = "https://mywallet-api-m71s.onrender.com";
 
 function signIn(body) {
-  const promise = axios.post(`${BASE_URL}/`, body);
+  const promise = axios.post(`${REACT_APP_API_URL}/`, body);
   return promise;
 }
 
 function signUp(body) {
-  const promise = axios.post(`${BASE_URL}/cadastro`, body);
+  const promise = axios.post(`${REACT_APP_API_URL}/cadastro`, body);
   return promise;
 }
 
