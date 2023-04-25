@@ -21,7 +21,11 @@ export default function HomePage() {
         setTransactions(res.data);
       })
       .catch((err) => {
-        alert(err.response.data);
+        if (!user.token) {
+          alert("Faça login!");
+        } else {
+          alert(err.response.data);
+        }
       });
   }
 

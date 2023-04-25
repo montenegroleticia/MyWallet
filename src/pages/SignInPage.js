@@ -23,8 +23,11 @@ export default function SignInPage() {
     apiAuth
       .signIn({ ...form })
       .then((res) => {
+        console.log(res.data);
+        const { token, name } = res.data;
         setDisabledLogin(false);
-        setUser(res.data);
+        setUser({ token, name });
+        localStorage.setItem("user", JSON.stringify({ token, name }));
         navigate("/home");
       })
       .catch((err) => {

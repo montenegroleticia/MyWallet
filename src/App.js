@@ -4,16 +4,13 @@ import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import TransactionsPage from "./pages/TransactionPage";
-import { useState } from "react";
-import { UserContext } from "./contexts/UserContext";
+import UserProvider from "./contexts/UserContext";
 
 export default function App() {
-  const [user, setUser] = useState({});
-
   return (
     <PagesContainer>
       <BrowserRouter>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserProvider>
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/cadastro" element={<SignUpPage />} />
@@ -23,7 +20,7 @@ export default function App() {
               element={<TransactionsPage />}
             />
           </Routes>
-        </UserContext.Provider>
+        </UserProvider>
       </BrowserRouter>
     </PagesContainer>
   );
