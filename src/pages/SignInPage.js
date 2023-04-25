@@ -23,7 +23,6 @@ export default function SignInPage() {
     apiAuth
       .signIn({ ...form })
       .then((res) => {
-        console.log(res.data);
         const { token, name } = res.data;
         setDisabledLogin(false);
         setUser({ token, name });
