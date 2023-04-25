@@ -45,12 +45,13 @@ export default function HomePage() {
   }
 
   function deleteTransaction(id) {
-    window.confirm("Deseja deletar essa transação?");
-
-    apiTransaction
-      .deleteTransaction(user.token, id)
-      .then(() => window.location.reload())
-      .catch((err) => alert(err.response.data));
+    const confirmed = window.confirm("Deseja deletar essa transação?");
+    if (confirmed) {
+      apiTransaction
+        .deleteTransaction(user.token, id)
+        .then(() => window.location.reload())
+        .catch((err) => alert(err.response.data));
+    }
   }
 
   useEffect(() => {
