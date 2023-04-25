@@ -71,9 +71,12 @@ export default function HomePage() {
                   <span>{t.data}</span>
                   <strong>{t.descricao}</strong>
                 </div>
-                <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
-                  {Number(t.valor).toFixed(2).replace(".", ",")}
-                </Value>
+                <div>
+                  <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
+                    {Number(t.valor).toFixed(2).replace(".", ",")}
+                  </Value>
+                  <p>X</p>
+                </div>
               </ListItemContainer>
             ))}
           </ul>
@@ -139,6 +142,18 @@ const TransactionsContainer = styled.article`
       text-transform: uppercase;
     }
   }
+  div {
+    display: flex;
+  }
+  p {
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #c6c6c6;
+  }
 `;
 const NoTransactions = styled.div`
   padding-top: 180px;
@@ -168,6 +183,7 @@ const ButtonsContainer = styled.section`
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
+  margin-right: 11px;
   color: ${(props) => (props.color === "positivo" ? "green" : "red")};
 `;
 const ListItemContainer = styled.li`
