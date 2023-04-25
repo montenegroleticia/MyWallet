@@ -49,7 +49,7 @@ export default function HomePage() {
 
     apiTransaction
       .deleteTransaction(user.token, id)
-      .then()
+      .then(() => window.location.reload())
       .catch((err) => alert(err.response.data));
   }
 

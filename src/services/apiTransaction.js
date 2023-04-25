@@ -25,14 +25,20 @@ function transaction(type, body, token) {
 }
 
 function logout(token) {
-  const promise = axios.delete(`${REACT_APP_API_URL}/logout`, createConfig(token));
+  const promise = axios.delete(
+    `${REACT_APP_API_URL}/logout`,
+    createConfig(token)
+  );
   return promise;
 }
 
-function deleteTransaction(token, id){
-  const promise = axios.delete(`${REACT_APP_API_URL}/${id}`, createConfig(token));
+function deleteTransaction(token, id) {
+  const promise = axios.delete(
+    `${REACT_APP_API_URL}/${id}`,
+    createConfig(token)
+  );
   return promise;
 }
 
-const apiAuth = { home, transaction, logout, deleteTransaction};
+const apiAuth = { home, transaction, logout, deleteTransaction };
 export default apiAuth;
