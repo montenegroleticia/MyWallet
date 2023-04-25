@@ -35,6 +35,8 @@ export default function HomePage() {
   }
 
   function logout() {
+    const confirmed = window.confirm("Sair?");
+    if (confirmed) {
     apiTransaction
       .logout(user.token)
       .then(() => {
@@ -42,10 +44,11 @@ export default function HomePage() {
         localStorage.removeItem("user");
       })
       .catch((err) => alert(err.response.data));
+    }
   }
 
   function deleteTransaction(id) {
-    const confirmed = window.confirm("Deseja deletar essa transação?");
+    const confirmed = window.confirm("Deletar transação?");
     if (confirmed) {
       apiTransaction
         .deleteTransaction(user.token, id)
