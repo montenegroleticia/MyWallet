@@ -37,7 +37,10 @@ export default function HomePage() {
   function logout() {
     apiTransaction
       .logout(user.token)
-      .then(() => navigate("/"))
+      .then(() => {
+        navigate("/");
+        localStorage.removeItem("user");
+      })
       .catch((err) => alert(err.response.data));
   }
 
