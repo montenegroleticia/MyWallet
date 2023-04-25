@@ -26,7 +26,7 @@ export default function TransactionsPage() {
       })
       .catch((err) => {
         setDisabledTransaction(false);
-        alert(err.response.data.message);
+        alert(err.response.data);
       });
   }
 

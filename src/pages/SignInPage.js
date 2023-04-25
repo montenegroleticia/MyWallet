@@ -30,7 +30,7 @@ export default function SignInPage() {
       })
       .catch((err) => {
         setDisabledLogin(false);
-        alert(err.response.data.message);
+        alert(err.response.data);
       });
   }
 

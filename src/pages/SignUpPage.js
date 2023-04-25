@@ -30,7 +30,7 @@ export default function SignUpPage() {
       })
       .catch((err) => {
         setDisabledRegister(false);
-        alert(err.response.data.message);
+        alert(err.response.data);
       });
   }
 

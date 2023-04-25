@@ -22,7 +22,7 @@ export default function HomePage() {
         setTransactions(res.data);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        alert(err.response.data);
       });
   }
 
