@@ -57,20 +57,23 @@ export default function HomePage() {
       </Header>
 
       <TransactionsContainer>
-        <ul>
-          {transactions.map((t) => (
-            <ListItemContainer key={t._id}>
-              <div>
-                <span>{t.data}</span>
-                <strong>{t.descricao}</strong>
-              </div>
-              <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
-                {Number(t.valor).toFixed(2).replace(".", ",")}
-              </Value>
-            </ListItemContainer>
-          ))}
-        </ul>
-
+        {total ? (
+          <ul>
+            {transactions.map((t) => (
+              <ListItemContainer key={t._id}>
+                <div>
+                  <span>{t.data}</span>
+                  <strong>{t.descricao}</strong>
+                </div>
+                <Value color={t.tipo === "saida" ? "negativo" : "positivo"}>
+                  {Number(t.valor).toFixed(2).replace(".", ",")}
+                </Value>
+              </ListItemContainer>
+            ))}
+          </ul>
+        ) : (
+          <NoTransactions>Não há registros de entrada ou saída</NoTransactions>
+        )}
         <article>
           <strong>Saldo</strong>
           <Value color={total < 0 ? "negativo" : "positivo"}>
@@ -130,6 +133,12 @@ const TransactionsContainer = styled.article`
       text-transform: uppercase;
     }
   }
+`;
+const NoTransactions = styled.div`
+  padding-top: 180px;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
 `;
 const ButtonsContainer = styled.section`
   margin-top: 15px;
