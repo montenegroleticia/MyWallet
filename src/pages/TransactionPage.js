@@ -71,6 +71,22 @@ export default function TransactionsPage() {
             `Salvar ${user.type === "saida" ? "saída" : "entrada"}`
           )}
         </button>
+        <button disabled={disabledTransaction} type="button" onClick={()=> navigate("/home")}>
+          {disabledTransaction ? (
+            <ThreeDots
+              height="40"
+              width="40"
+              radius="9"
+              color="#FFFFFF"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            `Cancelar`
+          )}
+        </button>
       </form>
     </TransactionsContainer>
   );
