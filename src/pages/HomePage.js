@@ -18,7 +18,6 @@ export default function HomePage() {
     apiTransaction
       .home(user.token)
       .then((res) => {
-        console.log(res.data);
         setTransactions(res.data);
       })
       .catch((err) => {
@@ -35,7 +34,7 @@ export default function HomePage() {
     apiTransaction
       .logout(user.token)
       .then(() => navigate("/"))
-      .catch((err) => console.log(err.response.data.message));
+      .catch((err) => alert(err.response.data));
   }
 
   useEffect(() => {

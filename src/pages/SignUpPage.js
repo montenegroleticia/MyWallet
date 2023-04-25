@@ -6,10 +6,14 @@ import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function SignUpPage() {
-  const [form, setForm] = useState({ nome: "", email: "", senha: "" });
+  const [form, setForm] = useState({
+    nome: "",
+    email: "",
+    senha: "",
+    confirmarSenha: "",
+  });
   const [disabledRegister, setDisabledRegister] = useState(false);
   const navigate = useNavigate();
-  let confirmarSenha;
 
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,9 +25,10 @@ export default function SignUpPage() {
     if (form.senha !== form.confirmarSenha) return alert("Senhas diferentes!");
 
     setDisabledRegister(true);
-
+    const body = { ...form };
+    delete body.confirmarSenha;
     apiAuth
-      .signUp(form)
+      .signUp(body)
       .then((res) => {
         setDisabledRegister(false);
         navigate("/");
@@ -60,6 +65,7 @@ export default function SignUpPage() {
           name="senha"
           placeholder="Senha"
           type="password"
+          minLength={3}
           required
           autoComplete="new-password"
           disabled={disabledRegister}
@@ -70,9 +76,10 @@ export default function SignUpPage() {
           name="confirmarSenha"
           placeholder="Confirme a senha"
           type="password"
+          minLength={3}
           required
           disabled={disabledRegister}
-          value={confirmarSenha}
+          value={form.confirmarSenha}
           onChange={handleForm}
         />
         <button type="submit" disabled={disabledRegister}>
