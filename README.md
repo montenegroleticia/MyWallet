@@ -3,13 +3,13 @@ My Wallet
 This project is a wallet where you can save your incoming and outgoing transactions with value and description to have financial control with the total remaining money.
 
 You can access the deployment through the link below:
-    
-    https://mywallet-montenegroleticia.vercel.app/
-
+```bash
+https://mywallet-montenegroleticia.vercel.app/
+```
 You can access the API repository through the link below:
-
-    https://github.com/montenegroleticia/MyWallet-api
-
+```bash
+https://github.com/montenegroleticia/MyWallet-api
+```
 Tools
 
 <div>
@@ -21,4 +21,27 @@ Tools
     <img align = "center" alt = "Git" src = "https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white" />
     <img align = "center" alt = "NPM" src = "https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" />
 </div>
+<br>
 
+How to run
+
+1. Clone this repository:
+```bash
+    https://github.com/montenegroleticia/MyWallet.git
+```
+2. Clone the back-end repository at and follow instructions to run:
+```bash
+    https://github.com/montenegroleticia/MyWallet-api
+```
+3. Install dependencies:
+```bash
+npm i
+```
+4. Run the front-end with:
+```bash
+npm start
+```
+5. Finally access on your favorite browser:
+```bash
+http://localhost:3000
+```
