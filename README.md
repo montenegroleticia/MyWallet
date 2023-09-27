@@ -2,14 +2,22 @@ My Wallet
 
 This project is a wallet where you can save your incoming and outgoing transactions with value and description to have financial control with the total remaining money.
 
+
+
+<img src="./assets/MyWallet.gif" />
+
+
+
 You can access the deployment through the link below:
-```bash
+
+
 https://mywallet-montenegroleticia.vercel.app/
-```
+
 You can access the API repository through the link below:
-```bash
+
+
 https://github.com/montenegroleticia/MyWallet-api
-```
+
 Tools
 
 <div>
